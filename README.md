@@ -7,6 +7,8 @@ Very much a work in progress! Feel free to fork and fix as you see fit =)
 
 PLEASE NOTE: There are a lot of bundle assumptions here, as it's mostly been tailored for a single use case.
 
+[![Build Status](https://secure.travis-ci.org/synthmedia/SynthNotificationBundle.png)](http://travis-ci.org/synthmedia/SynthNotificationBundle)
+
 ## Installation
 
 Update your `deps` file, and add the following lines:
