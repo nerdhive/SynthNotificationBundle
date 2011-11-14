@@ -23,7 +23,7 @@ class NotificationTest extends \PHPUnit_Framework_TestCase
         $notification->setMessage('Hello test world');
         $this->assertEquals('Hello test world', $notification->getMessage());
     }
-    
+
     public function testRead()
     {
         $notification = $this->getNotification();
@@ -34,6 +34,24 @@ class NotificationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $notification->setRead('not a boolean');
+        } catch (\Exception $e) {
+            return;
+        }
+
+        $this->fail('An expected exception has not been raised.');
+    }
+
+    public function testCreatedAt()
+    {
+        $notification = $this->getNotification();
+        $this->assertNull($notification->getCreatedAt());
+
+        $now = new \DateTime("now");
+        $notification->setCreatedAt($now);
+        $this->assertSame($now, $notification->getCreatedAt());
+
+        try {
+            $notification->setCreatedAt('not a DateTime object');
         } catch (\Exception $e) {
             return;
         }
