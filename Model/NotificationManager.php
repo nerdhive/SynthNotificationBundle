@@ -11,6 +11,13 @@
 
 namespace Synth\NotificationBundle\Model;
 
-class NotificationManager implements NotificationManagerInterface
+abstract class NotificationManager implements NotificationManagerInterface
 {
+    public function createNotification()
+    {
+        $class = $this->getClass();
+        $notification = new $class;
+
+        return $notification;
+    }
 }

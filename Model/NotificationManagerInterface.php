@@ -13,4 +13,31 @@ namespace Synth\NotificationBundle\Model;
 
 interface NotificationManagerInterface
 {
+    /**
+     * Creates an empty notification instance.
+     *
+     * @return NotificationInterface
+     */
+    function createNotification();
+
+    /**
+     * Deletes an existing notification.
+     *
+     * @param NotificationInterface $notification
+     */
+    function deleteNotification(NotificationInterface $notification);
+
+    /**
+     * Updates a notification.
+     *
+     * @param NotificationInterface $notification
+     */
+    function updateNotification(NotificationInterface $notification);
+
+    /**
+     * Returns a notification's fully qualified class name.
+     *
+     * @return string
+     */
+    function getClass();
 }
