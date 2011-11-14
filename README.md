@@ -1,4 +1,4 @@
-# Synth Notification Bundle
+# Synth Notification Bundle [![Build Status](https://secure.travis-ci.org/synthmedia/SynthNotificationBundle.png)](http://travis-ci.org/synthmedia/SynthNotificationBundle)
 
 The concept of this bundle is to provide a notification system, much like that of Facebook (but a basic version at
 present).
@@ -7,16 +7,16 @@ Very much a work in progress! Feel free to fork and fix as you see fit =)
 
 PLEASE NOTE: There are a lot of bundle assumptions here, as it's mostly been tailored for a single use case.
 
-[![Build Status](https://secure.travis-ci.org/synthmedia/SynthNotificationBundle.png)](http://travis-ci.org/synthmedia/SynthNotificationBundle)
+## Continuous Integration
 
 Builds are run using the awesome [Travis CI](http://travis-ci.org/), testing against PHP 5.3 with:
 
-* Symfony2 2.0.0
-* Symfony2 2.0.1
-* Symfony2 2.0.3
-* Symfony2 2.0.4
-* Symfony2 2.0.5 (current stable)
-* Symfony2 origin/master (development)
+* Symfony 2.0.0
+* Symfony 2.0.1
+* Symfony 2.0.3
+* Symfony 2.0.4
+* Symfony 2.0.5 (current stable)
+* Symfony origin/master (development)
 
 ## Installation
 
