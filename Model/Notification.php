@@ -11,8 +11,6 @@
 
 namespace Synth\NotificationBundle\Model;
 
-use DateTime;
-
 abstract class Notification implements NotificationInterface
 {
     /**
@@ -91,7 +89,7 @@ abstract class Notification implements NotificationInterface
      *
      * @param DateTime $createdAt
      */
-    public function setCreatedAt(DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }

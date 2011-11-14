@@ -19,11 +19,11 @@ interface NotificationInterface
 
     function getMessage();
 
-    function isRead($read);
+    function setRead($read);
+    
+    function isRead();
 
-    function getRead();
-
-    function setCreatedAt($createdAt);
+    function setCreatedAt(\DateTime $createdAt);
 
     function getCreatedAt();
 
