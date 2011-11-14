@@ -11,17 +11,17 @@
 
 namespace Synth\NotificationBundle\Entity;
 
-use FOS\UserBundle\Entity\User;
-use Synth\NotificationBundle\Model as BaseNotification;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Synth\NotificationBundle\Model\Notification as BaseNotification;
 
 class Notification extends BaseNotification
 {
     /**
      * Set the owner of the notification (who the notification is to)
      *
-     * @param User $owner
+     * @param UserInterface $owner
      */
-    public function setOwner(User $owner)
+    public function setOwner(UserInterface $owner)
     {
         $this->owner = $owner;
     }
@@ -39,9 +39,9 @@ class Notification extends BaseNotification
     /**
      * Set the sender of the notification (who the notification is from)
      *
-     * @param User $fromUser
+     * @param UserInterface $fromUser
      */
-    public function setFromUser(User $fromUser)
+    public function setFromUser(UserInterface $fromUser)
     {
         $this->fromUser = $fromUser;
     }

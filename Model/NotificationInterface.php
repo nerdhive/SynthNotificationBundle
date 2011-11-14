@@ -11,6 +11,8 @@
 
 namespace Synth\NotificationBundle\Model;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 interface NotificationInterface
 {
     function getId();
@@ -20,18 +22,18 @@ interface NotificationInterface
     function getMessage();
 
     function setRead($read);
-    
+
     function isRead();
 
     function setCreatedAt(\DateTime $createdAt);
 
     function getCreatedAt();
 
-    function setOwner($owner);
+    function setOwner(UserInterface $owner);
 
     function getOwner();
 
-    function setFromUser($fromUser);
+    function setFromUser(UserInterface $fromUser);
 
     function getFromUser();
 
