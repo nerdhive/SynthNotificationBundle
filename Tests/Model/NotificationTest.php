@@ -15,6 +15,12 @@ use Synth\NotificationBundle\Model\Notification;
 
 class NotificationTest extends \PHPUnit_Framework_TestCase
 {
+    public function testId()
+    {
+        $notification = $this->getNotification();
+        $this->assertNull($notification->getId());
+    }
+
     public function testMessage()
     {
         $notification = $this->getNotification();
