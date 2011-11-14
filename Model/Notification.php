@@ -26,7 +26,7 @@ abstract class Notification implements NotificationInterface
     /**
      * @var boolean $read
      */
-    protected $read;
+    protected $read = false;
 
     /**
      * @var DateTime $createdAt
@@ -71,6 +71,9 @@ abstract class Notification implements NotificationInterface
      */
     public function setRead($read)
     {
+        if (!is_bool($read)) {
+            throw new \Exception(sprintf('Notification read state must be set to a boolean, %s given.', gettype($read)));
+        }
         $this->read = $read;
     }
 

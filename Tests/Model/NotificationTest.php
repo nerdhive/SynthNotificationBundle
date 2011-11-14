@@ -23,6 +23,23 @@ class NotificationTest extends \PHPUnit_Framework_TestCase
         $notification->setMessage('Hello test world');
         $this->assertEquals('Hello test world', $notification->getMessage());
     }
+    
+    public function testRead()
+    {
+        $notification = $this->getNotification();
+        $this->assertFalse($notification->isRead());
+
+        $notification->setRead(true);
+        $this->assertTrue($notification->isRead());
+
+        try {
+            $notification->setRead('not a boolean');
+        } catch (\Exception $e) {
+            return;
+        }
+
+        $this->fail('An expected exception has not been raised.');
+    }
 
     protected function getNotification()
     {
