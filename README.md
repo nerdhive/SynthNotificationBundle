@@ -9,6 +9,15 @@ PLEASE NOTE: There are a lot of bundle assumptions here, as it's mostly been tai
 
 [![Build Status](https://secure.travis-ci.org/synthmedia/SynthNotificationBundle.png)](http://travis-ci.org/synthmedia/SynthNotificationBundle)
 
+Builds are run using the awesome [Travis CI](http://travis-ci.org/), testing against PHP 5.3 with:
+
+* Symfony2 2.0.0
+* Symfony2 2.0.1
+* Symfony2 2.0.3
+* Symfony2 2.0.4
+* Symfony2 2.0.5 (current stable)
+* Symfony2 origin/master (development)
+
 ## Installation
 
 Update your `deps` file, and add the following lines:
