@@ -9,6 +9,8 @@
  * @author Dom Udall <dom@synthmedia.co.uk>
  */
 
-namespace Synth\NotificationBundle\Entity;
+namespace Synth\NotificationBundle\Model;
 
-use Doctrine\ORM\EntityRepos
+class NotificationManager implements NotificationManagerInterface
+{
+}
