@@ -4,3 +4,9 @@ vendor/doctrine
 vendor/doctrine-common
 vendor/doctrine-dbal
 vendor/symfony
+
+## Eclipse specific
+
+.buildpath
+.project
+.settings
