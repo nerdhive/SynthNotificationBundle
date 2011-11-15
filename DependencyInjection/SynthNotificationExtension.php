@@ -17,16 +17,8 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
- */
 class SynthNotificationExtension extends Extension
 {
-    /**
-     * {@inheritDoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
@@ -34,6 +26,13 @@ class SynthNotificationExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+
+        if (in_array(strtolower($config['db_driver']), array('mongodb', 'couchdb'))) {
+            throw new \InvalidArgumentException(sprintf('Currently only the orm db driver is supported, %s support is en route.', $config['db_driver']));
+        } elseif (!in_array(strtolower($config['db_driver']), array('orm'))) {
+            throw new \InvalidArgumentException(sprintf('Invalid db driver "%s".', $config['db_driver']));
+        }
+
+        $loader->load(sprintf('%s.yml', $config['db_driver']));
     }
 }

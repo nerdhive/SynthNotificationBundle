@@ -1,7 +1,0 @@
-parameters:
-#    synth_notification.example.class: Synth\NotificationBundle\Example
-
-services:
-#    synth_notification.example:
-#        class: %synth_notification.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
