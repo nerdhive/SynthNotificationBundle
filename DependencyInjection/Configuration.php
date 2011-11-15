@@ -68,6 +68,10 @@ class Configuration implements ConfigurationInterface
                                     ->end()
                                 ->end()
                             ->end()
+                        ->scalarNode('template')
+                            ->defaultValue('SynthNotificationBundle:NewNotification:mail.txt.twig')
+                            ->cannotBeEmpty()
+                            ->end()
                         ->end()
                     ->end()
             ->end();

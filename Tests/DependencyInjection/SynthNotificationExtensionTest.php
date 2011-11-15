@@ -111,6 +111,10 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
             array('webmaster@example.com' => 'webmaster'),
             'synth_notification.new_notification.from_email'
         );
+        $this->assertParameter(
+            'SynthNotificationBundle:NewNotification:mail.txt.twig',
+            'synth_notification.new_notification.template'
+        );
     }
 
     public function testLoadConfiguration()
@@ -132,6 +136,10 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter(
             array('newnotification@yoursite.co.uk' => 'Site Notification Admin'),
             'synth_notification.new_notification.from_email'
+        );
+        $this->assertParameter(
+            'AcmeMyBundle:NewNotification:mail.txt.twig',
+            'synth_notification.new_notification.template'
         );
     }
 
@@ -167,6 +175,7 @@ new_notification:
     from_email:
         address: newnotification@yoursite.co.uk
         sender_name: Site Notification Admin
+    template: AcmeMyBundle:NewNotification:mail.txt.twig
 EOF;
         $parser = new Parser();
 

@@ -51,6 +51,8 @@ class SynthNotificationExtension extends Extension
             }
         }
 
+        $container->setParameter('synth_notification.new_notification.template', $config['new_notification']['template']);
+
         $container->setParameter('synth_notification.notification.class', $config['notification_class']);
         $container->setParameter('synth_notification.notification_manager.class', $config['notification_manager_class']);
 
