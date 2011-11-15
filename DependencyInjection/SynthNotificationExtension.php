@@ -28,11 +28,21 @@ class SynthNotificationExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         if (in_array(strtolower($config['db_driver']), array('mongodb', 'couchdb'))) {
-            throw new \InvalidArgumentException(sprintf('Currently only the orm db driver is supported, %s support is en route.', $config['db_driver']));
+            throw new \InvalidArgumentException(
+                sprintf('Currently only the orm db driver is supported, %s support is en route.', $config['db_driver'])
+            );
         } elseif (!in_array(strtolower($config['db_driver']), array('orm'))) {
             throw new \InvalidArgumentException(sprintf('Invalid db driver "%s".', $config['db_driver']));
         }
 
         $loader->load(sprintf('%s.yml', $config['db_driver']));
+
+        $container->setParameter('synth_notification.notification.class', $config['notification_class']);
+        $container->setParameter('synth_notification.notification_manager.class', $config['notification_manager_class']);
+
+        $container->setParameter('synth_notification.email_notification', $config['email_notification']);
+
+        $container->setParameter('synth_notification.from_email.address', $config['from_email']['address']);
+        $container->setParameter('synth_notification.from_email.sender_name', $config['from_email']['sender_name']);
     }
 }

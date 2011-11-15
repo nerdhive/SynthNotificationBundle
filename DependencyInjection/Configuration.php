@@ -37,7 +37,7 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->end()
                 ->scalarNode('notification_manager_class')
-                    ->defaultValue('webmaster@example.com')
+                    ->defaultValue('Synth\NotificationBundle\Entity\NotificationManager')
                     ->cannotBeEmpty()
                     ->end()
                 ->booleanNode('email_notification')
