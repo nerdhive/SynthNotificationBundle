@@ -1,13 +1,13 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+/**
+* This file is part of the Synth Notification Bundle.
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*
+* @author Dom Udall <dom@synthmedia.co.uk>
+*/
 
 namespace Synth\NotificationBundle\Tests\DependencyInjection;
 
@@ -38,6 +38,28 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
         $loader = new SynthNotificationExtension();
         $config = $this->getEmptyConfig();
         $config['db_driver'] = 'foo';
+        $loader->load(array($config), new ContainerBuilder());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testUserLoadThrowsExceptionMongoDBDriverIsInvalid()
+    {
+        $loader = new SynthNotificationExtension();
+        $config = $this->getEmptyConfig();
+        $config['db_driver'] = 'mongodb';
+        $loader->load(array($config), new ContainerBuilder());
+    }
+
+    /**
+    * @expectedException \InvalidArgumentException
+     */
+    public function testUserLoadThrowsExceptionCouchDBDriverIsInvalid()
+    {
+        $loader = new SynthNotificationExtension();
+        $config = $this->getEmptyConfig();
+        $config['db_driver'] = 'couchdb';
         $loader->load(array($config), new ContainerBuilder());
     }
 
