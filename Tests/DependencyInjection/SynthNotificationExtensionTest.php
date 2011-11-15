@@ -53,7 +53,7 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @expectedException \InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testUserLoadThrowsExceptionCouchDBDriverIsInvalid()
     {
@@ -63,49 +63,16 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), new ContainerBuilder());
     }
 
-//     /**
-//      * @expectedException \InvalidArgumentException
-//      */
-//     public function testUserLoadThrowsExceptionIfDatabaseDriverIsUnsupported()
-//     {
-//         $loader = new FOSUserExtension();
-//         $config = $this->getEmptyConfig();
-//         $config['db_driver'] = 'mongodb';
-//         $loader->load(array($config), new ContainerBuilder());
-//     }
-
-//     /**
-//      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-//      */
-//     public function testUserLoadThrowsExceptionUnlessFirewallNameSet()
-//     {
-//         $loader = new FOSUserExtension();
-//         $config = $this->getEmptyConfig();
-//         unset($config['firewall_name']);
-//         $loader->load(array($config), new ContainerBuilder());
-//     }
-
-//     /**
-//      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-//      */
-//     public function testUserLoadThrowsExceptionUnlessGroupModelClassSet()
-//     {
-//         $loader = new FOSUserExtension();
-//         $config = $this->getFullConfig();
-//         unset($config['group']['group_class']);
-//         $loader->load(array($config), new ContainerBuilder());
-//     }
-
-//     /**
-//      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-//      */
-//     public function testUserLoadThrowsExceptionUnlessUserModelClassSet()
-//     {
-//         $loader = new FOSUserExtension();
-//         $config = $this->getEmptyConfig();
-//         unset($config['user_class']);
-//         $loader->load(array($config), new ContainerBuilder());
-//     }
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testUserLoadThrowsExceptionUnlessUserModelClassSet()
+    {
+        $loader = new SynthNotificationExtension();
+        $config = $this->getEmptyConfig();
+        unset($config['user_class']);
+        $loader->load(array($config), new ContainerBuilder());
+    }
 
 //     public function testDisableRegistration()
 //     {
