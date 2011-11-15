@@ -77,7 +77,21 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), new ContainerBuilder());
     }
 
-    public function testLoadConfigurationDefaults()
+    public function testLoadManagerClassWithDefaults()
+    {
+        $this->createEmptyConfiguration();
+
+        $this->assertHasDefinition('synth_notification.notification_manager');
+    }
+
+    public function testLoadManagerClass()
+    {
+        $this->createFullConfiguration();
+
+        $this->assertHasDefinition('synth_notification.notification_manager');
+    }
+
+    public function testLoadConfigurationWithDefaults()
     {
         $this->createEmptyConfiguration();
 
@@ -94,18 +108,34 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
             'synth_notification.email_notification'
         );
         $this->assertParameter(
-            'webmaster@example.com',
-            'synth_notification.from_email.address'
+            array('webmaster@example.com' => 'webmaster'),
+            'synth_notification.new_notification.from_email'
+        );
+    }
+
+    public function testLoadConfiguration()
+    {
+        $this->createFullConfiguration();
+
+        $this->assertParameter(
+            'Acme\MyBundle\Entity\Notification',
+            'synth_notification.notification.class'
         );
         $this->assertParameter(
-            'webmaster',
-            'synth_notification.from_email.sender_name'
+            'Acme\MyBundle\Entity\NotificationManager',
+            'synth_notification.notification_manager.class'
+        );
+        $this->assertParameter(
+            false,
+            'synth_notification.email_notification'
+        );
+        $this->assertParameter(
+            array('newnotification@yoursite.co.uk' => 'Site Notification Admin'),
+            'synth_notification.new_notification.from_email'
         );
     }
 
     /**
-     * getEmptyConfig
-     *
      * @return array
      */
     protected function getEmptyConfig()
@@ -113,6 +143,30 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
         $yaml = <<<EOF
 db_driver: orm
 user_class: Acme\MyBundle\Entity\User
+EOF;
+        $parser = new Parser();
+
+        return $parser->parse($yaml);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getFullConfig()
+    {
+        $yaml = <<<EOF
+db_driver: orm
+user_class: Acme\MyBundle\Entity\User
+notification_class: Acme\MyBundle\Entity\Notification
+notification_manager_class: Acme\MyBundle\Entity\NotificationManager
+email_notification: false
+from_email:
+    address: admin@yoursite.co.uk
+    sender_name: Site Admin
+new_notification:
+    from_email:
+        address: newnotification@yoursite.co.uk
+        sender_name: Site Notification Admin
 EOF;
         $parser = new Parser();
 
@@ -131,9 +185,26 @@ EOF;
         $this->assertTrue($this->configuration instanceof ContainerBuilder);
     }
 
+    /**
+     * @return ContainerBuilder
+     */
+    protected function createFullConfiguration()
+    {
+        $this->configuration = new ContainerBuilder();
+        $loader = new SynthNotificationExtension();
+        $config = $this->getFullConfig();
+        $loader->load(array($config), $this->configuration);
+        $this->assertTrue($this->configuration instanceof ContainerBuilder);
+    }
+
     private function assertParameter($value, $key)
     {
         $this->assertEquals($value, $this->configuration->getParameter($key), sprintf('%s parameter is correct', $key));
+    }
+
+    private function assertHasDefinition($id)
+    {
+        $this->assertTrue(($this->configuration->hasDefinition($id) ?: $this->configuration->hasAlias($id)));
     }
 
     protected function tearDown()

@@ -54,8 +54,22 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue('webmaster')
                             ->cannotBeEmpty()
                             ->end()
+                        ->end()
                     ->end()
-                ->end()
+                ->arrayNode('new_notification')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('from_email')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('address')
+                                    ->end()
+                                ->scalarNode('sender_name')
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
             ->end();
 
         return $treeBuilder;

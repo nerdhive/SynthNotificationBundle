@@ -37,12 +37,23 @@ class SynthNotificationExtension extends Extension
 
         $loader->load(sprintf('%s.yml', $config['db_driver']));
 
+        $container->setParameter(
+            'synth_notification.new_notification.from_email',
+            array($config['from_email']['address'] => $config['from_email']['sender_name'])
+        );
+
+        if (!empty($config['new_notification'])) {
+            if (!empty($config['new_notification']['from_email'])) {
+                $container->setParameter(
+                    'synth_notification.new_notification.from_email',
+                    array($config['new_notification']['from_email']['address'] => $config['new_notification']['from_email']['sender_name'])
+                );
+            }
+        }
+
         $container->setParameter('synth_notification.notification.class', $config['notification_class']);
         $container->setParameter('synth_notification.notification_manager.class', $config['notification_manager_class']);
 
         $container->setParameter('synth_notification.email_notification', $config['email_notification']);
-
-        $container->setParameter('synth_notification.from_email.address', $config['from_email']['address']);
-        $container->setParameter('synth_notification.from_email.sender_name', $config['from_email']['sender_name']);
     }
 }
