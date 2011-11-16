@@ -57,5 +57,10 @@ class SynthNotificationExtension extends Extension
         $container->setParameter('synth_notification.notification_manager.class', $config['notification_manager_class']);
 
         $container->setParameter('synth_notification.email_notification', $config['email_notification']);
+
+        // Setting up mail service
+        $loader->load('mailer.yml');
+        $container->setAlias('synth_notification.mailer', $config['service']['mailer']);
+        $container->setAlias('synth_notification.notification_manager', $config['service']['notification_manager']);
     }
 }

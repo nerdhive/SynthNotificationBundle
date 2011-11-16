@@ -12,6 +12,7 @@
 namespace Synth\NotificationBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
@@ -38,6 +39,10 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->scalarNode('notification_manager_class')
                     ->defaultValue('Synth\NotificationBundle\Entity\NotificationManager')
+                    ->cannotBeEmpty()
+                    ->end()
+                ->scalarNode('mailer_class')
+                    ->defaultValue('Synth\NotificationBundle\Mailer\Mailer')
                     ->cannotBeEmpty()
                     ->end()
                 ->booleanNode('email_notification')
@@ -76,6 +81,28 @@ class Configuration implements ConfigurationInterface
                     ->end()
             ->end();
 
+        $this->addServiceSection($rootNode);
+
         return $treeBuilder;
+    }
+
+    private function addServiceSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('service')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('mailer')
+                            ->defaultValue('synth_notification.mailer.default')
+                            ->end()
+                        ->scalarNode('notification_manager')
+                            ->defaultValue('synth_notification.notification_manager.default')
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }

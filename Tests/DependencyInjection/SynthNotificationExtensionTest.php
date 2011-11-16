@@ -77,18 +77,34 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), new ContainerBuilder());
     }
 
-    public function testLoadManagerClassWithDefaults()
+//     public function testLoadManagerClassWithDefaults()
+//     {
+//         $this->createEmptyConfiguration();
+
+//         $this->assertHasDefinition('synth_notification.notification_manager');
+//     }
+
+//     public function testLoadManagerClass()
+//     {
+//         $this->createFullConfiguration();
+
+//         $this->assertHasDefinition('synth_notification.notification_manager');
+//     }
+
+    public function testLoadServicesWithDefaults()
     {
         $this->createEmptyConfiguration();
 
-        $this->assertHasDefinition('synth_notification.notification_manager');
+        $this->assertAlias('synth_notification.mailer.default', 'synth_notification.mailer');
+        $this->assertAlias('synth_notification.notification_manager.default', 'synth_notification.notification_manager');
     }
 
-    public function testLoadManagerClass()
+    public function testLoadServices()
     {
         $this->createFullConfiguration();
 
-        $this->assertHasDefinition('synth_notification.notification_manager');
+        $this->assertAlias('acme_my.mailer', 'synth_notification.mailer');
+        $this->assertAlias('acme_my.notification_manager', 'synth_notification.notification_manager');
     }
 
     public function testLoadConfigurationWithDefaults()
@@ -176,6 +192,9 @@ new_notification:
         address: newnotification@yoursite.co.uk
         sender_name: Site Notification Admin
     template: AcmeMyBundle:NewNotification:mail.txt.twig
+service:
+    mailer: acme_my.mailer
+    notification_manager: acme_my.notification_manager
 EOF;
         $parser = new Parser();
 
@@ -214,6 +233,11 @@ EOF;
     private function assertHasDefinition($id)
     {
         $this->assertTrue(($this->configuration->hasDefinition($id) ?: $this->configuration->hasAlias($id)));
+    }
+
+    private function assertAlias($value, $key)
+    {
+        $this->assertEquals($value, (string) $this->configuration->getAlias($key), sprintf('%s alias is correct', $key));
     }
 
     protected function tearDown()
