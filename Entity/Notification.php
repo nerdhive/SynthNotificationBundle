@@ -17,6 +17,21 @@ use Synth\NotificationBundle\Model\Notification as BaseNotification;
 class Notification extends BaseNotification
 {
     /**
+     * @var UserInterface $owner
+     */
+    protected $owner;
+
+    /**
+     * @var UserInterface $fromUser
+     */
+    protected $fromUser;
+
+    /**
+     * @var integer $type
+     */
+    protected $type;
+
+    /**
      * Set the owner of the notification (who the notification is to)
      *
      * @param UserInterface $owner
@@ -63,6 +78,9 @@ class Notification extends BaseNotification
      */
     public function setType($type)
     {
+        if (!is_int($type)) {
+            throw new \Exception(sprintf('Notification type must be set to an integer, %s given.', gettype($type)));
+        }
         $this->type = $type;
     }
 

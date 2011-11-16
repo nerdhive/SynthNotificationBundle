@@ -9,7 +9,7 @@
  * @author Dom Udall <dom@synthmedia.co.uk>
  */
 
-namespace Synth\NotificationBundle\Tests\Mailer;
+namespace Synth\NotificationBundle\Tests\Mock;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 

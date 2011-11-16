@@ -14,7 +14,7 @@ namespace Synth\NotificationBundle\Tests\Mailer;
 use Synth\NotificationBundle\Mailer\Mailer;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Synth\NotificationBundle\Tests\Mailer\User;
+use Synth\NotificationBundle\Tests\Mock\SystemMailer;
 
 class MailerTest extends \PHPUnit_Framework_TestCase
 {
@@ -86,6 +86,6 @@ MAIL;
 
     protected function getUser()
     {
-        return $this->getMockForAbstractClass('Synth\NotificationBundle\Tests\Mailer\User');
+        return $this->getMockForAbstractClass('Synth\NotificationBundle\Tests\Mock\User');
     }
 }
