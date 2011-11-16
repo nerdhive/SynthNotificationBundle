@@ -35,7 +35,6 @@ class Mailer implements MailerInterface
     {
         $template = $this->parameters['new_notification.template'];
         $parameters = array();
-        $url = $this->router->generate('synth_notification_new_notification', $parameters, true);
         $rendered = $this->templating->render($template, array(
             'user' => $user
         ));

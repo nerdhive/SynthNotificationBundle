@@ -13,6 +13,7 @@ $deps = array(
     array('doctrine-common', 'http://github.com/doctrine/common.git', 'origin/master'),
     array('doctrine-dbal', 'http://github.com/doctrine/dbal.git', 'origin/master'),
     array('doctrine', 'http://github.com/doctrine/doctrine2.git', 'origin/master'),
+    array('swiftmailer', 'http://github.com/swiftmailer/swiftmailer.git', 'origin/master'),
 );
 
 foreach ($deps as $dep) {

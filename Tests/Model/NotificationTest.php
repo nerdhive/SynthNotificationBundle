@@ -9,7 +9,7 @@
  * @author Dom Udall <dom@synthmedia.co.uk>
  */
 
-namespace Synth\NotificationBundle\Test\Model;
+namespace Synth\NotificationBundle\Tests\Model;
 
 use Synth\NotificationBundle\Model\Notification;
 
