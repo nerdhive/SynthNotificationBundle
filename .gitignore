@@ -6,6 +6,7 @@ vendor/doctrine
 vendor/doctrine-common
 vendor/doctrine-dbal
 vendor/symfony
+vendor/swiftmailer
 
 ## Eclipse specific
 
