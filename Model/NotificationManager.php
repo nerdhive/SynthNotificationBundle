@@ -17,6 +17,7 @@ abstract class NotificationManager implements NotificationManagerInterface
     {
         $class = $this->getClass();
         $notification = new $class;
+        $notification->setCreatedAt(new \DateTime("now"));
 
         return $notification;
     }
