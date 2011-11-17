@@ -120,6 +120,10 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
             'synth_notification.notification_manager.class'
         );
         $this->assertParameter(
+            'Synth\NotificationBundle\Mailer\Mailer',
+            'synth_notification.mailer.class'
+        );
+        $this->assertParameter(
             true,
             'synth_notification.email_notification'
         );
@@ -144,6 +148,10 @@ class SynthNotificationExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter(
             'Acme\MyBundle\Entity\NotificationManager',
             'synth_notification.notification_manager.class'
+        );
+        $this->assertParameter(
+            'Acme\MyBundle\Mailer\Mailer',
+            'synth_notification.mailer.class'
         );
         $this->assertParameter(
             false,
@@ -183,6 +191,7 @@ db_driver: orm
 user_class: Acme\MyBundle\Entity\User
 notification_class: Acme\MyBundle\Entity\Notification
 notification_manager_class: Acme\MyBundle\Entity\NotificationManager
+mailer_class: Acme\MyBundle\Mailer\Mailer
 email_notification: false
 from_email:
     address: admin@yoursite.co.uk

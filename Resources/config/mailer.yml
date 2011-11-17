@@ -1,6 +1,6 @@
 services:
   synth_notification.mailer.default:
-    class: %synth_notification.mailer_class%
+    class: %synth_notification.mailer.class%
     arguments:
       - @mailer
       - @router
