@@ -102,6 +102,24 @@ class NotificationManager extends BaseNotificationManager
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
+    public function markNotificationsAsRead(UserInterface $owner, $type = null)
+    {
+        $queryBuilder = $this->createQueryBuilder();
+        $queryBuilder
+            ->update()
+            ->set("synth_notification.read", '?1')
+            ->Where("synth_notification.owner = {$owner->getId()}")
+            ->setParameter(1, true);
+
+        if ($type) {
+            $queryBuilder
+            ->andWhere("synth_notification.type = {$type}");
+        }
+
+        $queryBuilder->getQuery()->getResult();
+    }
+
+
     /**
      * @return QueryBuilder
      */
