@@ -56,21 +56,58 @@ class NotificationManager extends BaseNotificationManager
         return $this->repository->findOneBy($criteria);
     }
 
-    public function findNotificationsForUser(UserInterface $user)
+    public function findNotificationsForUser(UserInterface $owner)
     {
         $criteria = array(
-            "fromUser" => $user->getId()
+            "owner" => $owner->getId()
         );
         return $this->repository->findBy($criteria);
     }
 
-    public function findNotificationsForUserByType(UserInterface $user, $type)
+    public function findNotificationsForUserByType(UserInterface $owner, $type)
     {
         $criteria = array(
-            "fromUser" => $user->getId(),
+            "owner" => $owner->getId(),
             "type" => $type
         );
         return $this->repository->findBy($criteria);
+    }
+
+    public function getTotalNotifications(UserInterface $owner, $onlyUnread = true)
+    {
+        return $this->getNotificationCount($owner, null, $onlyUnread);
+    }
+
+    public function getTotalNotificationsForType(UserInterface $owner, $type, $onlyUnread = true)
+    {
+        return $this->getNotificationCount($owner, $type, $onlyUnread);
+    }
+
+    protected function getNotificationCount(UserInterface $owner, $type = null, $onlyUnread = null) {
+        $queryBuilder = $this->createQueryBuilder();
+        $queryBuilder
+            ->select($queryBuilder->expr()->count("synth_notification.id"))
+            ->Where("synth_notification.owner = {$owner->getId()}");
+
+        if ($type) {
+            $queryBuilder
+                ->andWhere("synth_notification.type = {$type}");
+        }
+
+        if ($onlyUnread) {
+            $queryBuilder
+                ->andWhere("synth_notification.read = false");
+        }
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createQueryBuilder()
+    {
+        return $this->repository->createQueryBuilder("synth_notification");
     }
 
     public function getClass()
