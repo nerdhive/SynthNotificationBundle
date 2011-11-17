@@ -12,6 +12,7 @@
 namespace Synth\NotificationBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Synth\NotificationBundle\Model\NotificationManager as BaseNotificationManager;
 use Synth\NotificationBundle\Model\NotificationInterface;
 
@@ -48,6 +49,28 @@ class NotificationManager extends BaseNotificationManager
         if ($andFlush) {
             $this->em->flush();
         }
+    }
+
+    public function findNotificationBy(array $criteria)
+    {
+        return $this->repository->findOneBy($criteria);
+    }
+
+    public function findNotificationsForUser(UserInterface $user)
+    {
+        $criteria = array(
+            "fromUser" => $user->getId()
+        );
+        return $this->repository->findBy($criteria);
+    }
+
+    public function findNotificationsForUserByType(UserInterface $user, $type)
+    {
+        $criteria = array(
+            "fromUser" => $user->getId(),
+            "type" => $type
+        );
+        return $this->repository->findBy($criteria);
     }
 
     public function getClass()
