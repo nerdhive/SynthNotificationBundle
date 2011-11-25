@@ -18,6 +18,7 @@ use Synth\NotificationBundle\Model\NotificationInterface;
 
 class NotificationManager extends BaseNotificationManager
 {
+    protected $container;
     protected $em;
     protected $class;
     protected $repository;
@@ -28,8 +29,10 @@ class NotificationManager extends BaseNotificationManager
      * @param EntityManager           $em
      * @param string                  $class
      */
-    public function __construct(EntityManager $em, $class)
+    public function __construct($container, EntityManager $em, $class)
     {
+        $this->container = $container;
+
         $this->em = $em;
         $this->repository = $em->getRepository($class);
 
