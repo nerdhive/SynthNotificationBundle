@@ -17,8 +17,21 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
+/**
+ * Extension class for loading and mapping Synth Notification Bundle configuration.
+ *
+ * @author Dom Udall <dom@synthmedia.co.uk>
+ */
 class SynthNotificationExtension extends Extension
 {
+    /**
+     * Loads a specific configuration.
+     *
+     * @param array            $configs   An array of configuration values
+     * @param ContainerBuilder $container A ContainerBuilder instance
+     *
+     * @throws \InvalidArgumentException When provided tag is not defined in this extension
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();

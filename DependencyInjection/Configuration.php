@@ -15,8 +15,19 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * Configuration class for Synth Notification Bundle.
+ *
+ * @author Dom Udall <dom@synthmedia.co.uk>
+ */
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * (non-PHPdoc)
+     *
+     * @see Symfony\Component\Config\Definition.ConfigurationInterface::getConfigTreeBuilder()
+     * @return TreeBuilder
+     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
@@ -86,6 +97,11 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * Creates the services section of the configuration file.
+     *
+     * @param ArrayNodeDefinition $node Root node of configuration tree builder
+     */
     private function addServiceSection(ArrayNodeDefinition $node)
     {
         $node

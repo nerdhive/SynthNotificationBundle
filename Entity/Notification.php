@@ -14,6 +14,11 @@ namespace Synth\NotificationBundle\Entity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Synth\NotificationBundle\Model\Notification as BaseNotification;
 
+/**
+ * ORM entity for notification.
+ *
+ * @author Dom Udall <dom@synthmedia.co.uk>
+ */
 class Notification extends BaseNotification
 {
     /**
