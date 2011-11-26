@@ -59,21 +59,21 @@ class NotificationManager extends BaseNotificationManager
         return $this->repository->findOneBy($criteria);
     }
 
-    public function findNotificationsForUser(UserInterface $owner)
+    public function findNotificationsForUser(UserInterface $owner, array $order = array("createdAt" => "DESC"))
     {
         $criteria = array(
             "owner" => $owner->getId()
         );
-        return $this->repository->findBy($criteria);
+        return $this->repository->findBy($criteria, $order);
     }
 
-    public function findNotificationsForUserByType(UserInterface $owner, $type)
+    public function findNotificationsForUserByType(UserInterface $owner, $type, array $order = array("createdAt" => "DESC"))
     {
         $criteria = array(
             "owner" => $owner->getId(),
             "type" => $type
         );
-        return $this->repository->findBy($criteria);
+        return $this->repository->findBy($criteria, $order);
     }
 
     public function getTotalNotifications(UserInterface $owner, $onlyUnread = true)
