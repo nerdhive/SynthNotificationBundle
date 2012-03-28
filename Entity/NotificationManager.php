@@ -87,7 +87,7 @@ class NotificationManager extends BaseNotificationManager
         }
 
         if ($excludeOwner) {
-            $queryBuilder->andWhere("synth_notification.fromuser <> {$owner->getId()}");
+            $queryBuilder->andWhere("synth_notification.fromUser <> {$owner->getId()}");
         }
 
         foreach ($order as $orderField => $orderDirection) {
