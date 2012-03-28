@@ -76,7 +76,7 @@ class NotificationManager extends BaseNotificationManager
         return $this->repository->findBy($criteria, $order);
     }
 
-    public function findNotificationsForUserExcludingType(UserInterface $owner, array $types, array $order = array("createdAt" => "DESC"))
+    public function findNotificationsForUserExcludingType(UserInterface $owner, array $types, array $order = array("createdAt" => "DESC"), $excludeOwner = false)
     {
         $queryBuilder = $this->repository->createQueryBuilder("synth_notification");
         $queryBuilder
@@ -84,6 +84,10 @@ class NotificationManager extends BaseNotificationManager
 
         foreach ($types as $type) {
             $queryBuilder->andWhere("synth_notification.type <> {$type}");
+        }
+
+        if ($excludeOwner) {
+            $queryBuilder->andWhere("synth_notification.fromuser <> {$owner->getId()}");
         }
 
         foreach ($order as $orderField => $orderDirection) {
