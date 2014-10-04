@@ -10,13 +10,13 @@
  */
 
 $vendorDir = __DIR__.'/../vendor';
-require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+require_once $vendorDir.'/symfony/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
-    'Symfony'                => array($vendorDir.'/symfony/src', $vendorDir.'/bundles'),
+    'Symfony'                => array($vendorDir.'/symfony/symfony/src', $vendorDir.'/bundles'),
     'Doctrine\\Common'       => $vendorDir.'/doctrine-common/lib',
     'Doctrine\\DBAL'         => $vendorDir.'/doctrine-dbal/lib',
     'Doctrine'               => $vendorDir.'/doctrine/lib',
@@ -36,5 +36,5 @@ spl_autoload_register(function($class) {
 
 // Swiftmailer needs a special autoloader to allow
 // the lazy loading of the init file (which is expensive)
-require_once __DIR__.'/../vendor/swiftmailer/lib/classes/Swift.php';
-Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/lib/swift_init.php');
+require_once $vendorDir.'/swiftmailer/swiftmailer/lib/classes/Swift.php';
+Swift::registerAutoload($vendorDir.'/swiftmailer/swiftmailer/lib/swift_init.php');

@@ -13,3 +13,5 @@ vendor/swiftmailer
 .buildpath
 .project
 .settings
+/vendor
+/bin
