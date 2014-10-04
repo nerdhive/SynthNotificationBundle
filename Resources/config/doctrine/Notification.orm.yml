@@ -1,0 +1,11 @@
+Synth\NotificationBundle\Entity\Notification:
+  type: mappedSuperclass
+
+  fields:
+    createdAt:
+      type: datetime
+    message: ~
+    read:
+      type: boolean
+    type:
+      type: integer
