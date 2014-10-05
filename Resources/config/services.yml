@@ -1,0 +1,5 @@
+services:
+    synth_notification.controller.notification:
+        class: Synth\NotificationBundle\Controller\NotificationController
+        calls:
+             - [setContainer, ["@service_container"]]

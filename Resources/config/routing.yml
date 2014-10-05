@@ -1,0 +1,19 @@
+notification:markRead:
+    path:     /markRead/{notificationId}
+    defaults: { _controller: synth_notification.controller.notification:markNotificationAsReadAction }
+    requirements:
+        notificationId:  \d+
+
+notification:markReadAll:
+    path:     /markReadAll
+    defaults: { _controller: synth_notification.controller.notification:markNotificationsAsReadAction }
+
+notification:delete:
+    path:     /delete/{notificationId}
+    defaults: { _controller: synth_notification.controller.notification:deleteNotificationAction }
+    requirements:
+        notificationId:  \d+
+
+notification:deleteAll:
+    path:     /deleteAll
+    defaults: { _controller: synth_notification.controller.notification:deleteNotificationsAction }

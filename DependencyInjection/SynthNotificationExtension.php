@@ -76,5 +76,8 @@ class SynthNotificationExtension extends Extension
         $loader->load('mailer.yml');
         $container->setAlias('synth_notification.mailer', $config['service']['mailer']);
         $container->setAlias('synth_notification.notification_manager', $config['service']['notification_manager']);
+
+        // Setting up other services like controller
+        $loader->load('services.yml');
     }
 }
