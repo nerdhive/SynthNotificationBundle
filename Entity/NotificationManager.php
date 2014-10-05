@@ -42,6 +42,16 @@ class NotificationManager extends BaseNotificationManager
         $this->em->flush();
     }
 
+	/**
+     * @param NotificationInterface[] $notifications
+     */
+    public function deleteNotifications(array $notifications)
+    {
+        foreach ($notifications as $notification) {
+            $this->deleteNotification($notification);
+        }
+    }
+
     public function updateNotification(NotificationInterface $notification, $andFlush = true)
     {
         $this->em->persist($notification);
@@ -52,6 +62,15 @@ class NotificationManager extends BaseNotificationManager
 
     public function findNotificationBy(array $criteria)
     {
+        return $this->repository->findOneBy($criteria);
+    }
+
+    public function findNotificationByForUser(UserInterface $owner, array $criteria)
+    {
+        $criteria = array_merge($criteria, array(
+            "owner" => $owner->getId()
+        ));
+
         return $this->repository->findOneBy($criteria);
     }
 
