@@ -19,17 +19,17 @@ abstract class Notification implements NotificationInterface
     protected $id;
 
     /**
-     * @var text $message
+     * @var string $message
      */
     protected $message;
 
     /**
-     * @var boolean $read
+     * @var boolean $isRead
      */
-    protected $read = false;
+    protected $isRead = false;
 
     /**
-     * @var DateTime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
 
@@ -47,7 +47,7 @@ abstract class Notification implements NotificationInterface
     /**
      * Set the notification message
      *
-     * @param text $message
+     * @param string $message
      */
     public function setMessage($message)
     {
@@ -57,7 +57,7 @@ abstract class Notification implements NotificationInterface
     /**
      * Get the notification message
      *
-     * @return text
+     * @return string
      */
     public function getMessage()
     {
@@ -67,6 +67,8 @@ abstract class Notification implements NotificationInterface
     /**
      * Set if the notification has been read by the owner
      *
+     * @throws \Exception if $read isn't a boolean value
+     *
      * @param boolean $read
      */
     public function setRead($read)
@@ -74,7 +76,7 @@ abstract class Notification implements NotificationInterface
         if (!is_bool($read)) {
             throw new \Exception(sprintf('Notification read state must be set to a boolean, %s given.', gettype($read)));
         }
-        $this->read = $read;
+        $this->isRead = $read;
     }
 
     /**
@@ -84,13 +86,13 @@ abstract class Notification implements NotificationInterface
      */
     public function isRead()
     {
-        return $this->read;
+        return $this->isRead;
     }
 
     /**
      * Set the date when the notification was created
      *
-     * @param DateTime $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -100,7 +102,7 @@ abstract class Notification implements NotificationInterface
     /**
      * Get the date when the notification was created
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

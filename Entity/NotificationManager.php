@@ -12,27 +12,23 @@
 namespace Synth\NotificationBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Synth\NotificationBundle\Model\NotificationManager as BaseNotificationManager;
 use Synth\NotificationBundle\Model\NotificationInterface;
 
 class NotificationManager extends BaseNotificationManager
 {
-    protected $container;
     protected $em;
     protected $class;
     protected $repository;
 
     /**
-     * Constructor.
-     *
      * @param EntityManager           $em
      * @param string                  $class
      */
-    public function __construct($container, EntityManager $em, $class)
+    public function __construct(EntityManager $em, $class)
     {
-        $this->container = $container;
-
         $this->em = $em;
         $this->repository = $em->getRepository($class);
 
@@ -152,6 +148,9 @@ class NotificationManager extends BaseNotificationManager
         return $this->repository->createQueryBuilder("synth_notification");
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getClass()
     {
         return $this->class;

@@ -19,7 +19,7 @@ use Synth\NotificationBundle\Model\Notification as BaseNotification;
  *
  * @author Dom Udall <dom@synthmedia.co.uk>
  */
-class Notification extends BaseNotification
+abstract class Notification extends BaseNotification
 {
     /**
      * @var UserInterface $owner
@@ -49,7 +49,7 @@ class Notification extends BaseNotification
     /**
      * Get the owner of the notification
      *
-     * @return User
+     * @return UserInterface
      */
     public function getOwner()
     {
@@ -69,7 +69,7 @@ class Notification extends BaseNotification
     /**
      * Get the sender of the notification
      *
-     * @return User
+     * @return UserInterface
      */
     public function getFromUser()
     {
@@ -78,6 +78,8 @@ class Notification extends BaseNotification
 
     /**
      * Set the notification type
+     *
+     * @throws \Exception if $type isn't an integer value
      *
      * @param integer $type
      */

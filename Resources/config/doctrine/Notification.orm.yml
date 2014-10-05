@@ -5,7 +5,7 @@ Synth\NotificationBundle\Entity\Notification:
     createdAt:
       type: datetime
     message: ~
-    read:
+    isRead:
       type: boolean
     type:
       type: integer

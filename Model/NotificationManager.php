@@ -13,11 +13,18 @@ namespace Synth\NotificationBundle\Model;
 
 abstract class NotificationManager implements NotificationManagerInterface
 {
-    public function createNotification()
+
+	/**
+     * @inheritdoc
+     */
+    public function createNotification($type, $message)
     {
         $class = $this->getClass();
+        /* @var $notification NotificationInterface */
         $notification = new $class;
         $notification->setCreatedAt(new \DateTime("now"));
+        $notification->setType($type);
+        $notification->setMessage($message);
 
         return $notification;
     }

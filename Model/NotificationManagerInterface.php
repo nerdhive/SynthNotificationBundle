@@ -16,9 +16,12 @@ interface NotificationManagerInterface
     /**
      * Creates an empty notification instance.
      *
+     * @param integer $type notification type as integer
+     * @param string $message notification message
+     *
      * @return NotificationInterface
      */
-    function createNotification();
+    function createNotification($type, $message);
 
     /**
      * Deletes an existing notification.
