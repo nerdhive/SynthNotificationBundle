@@ -116,7 +116,7 @@ class NotificationManager extends BaseNotificationManager
 
         if ($onlyUnread) {
             $queryBuilder
-                ->andWhere("synth_notification.read = false");
+                ->andWhere("synth_notification.isRead = false");
         }
 
         return $queryBuilder->getQuery()->getSingleScalarResult();
@@ -127,7 +127,7 @@ class NotificationManager extends BaseNotificationManager
         $queryBuilder = $this->createQueryBuilder();
         $queryBuilder
             ->update()
-            ->set("synth_notification.read", '?1')
+            ->set("synth_notification.isRead", '?1')
             ->Where("synth_notification.owner = {$owner->getId()}")
             ->setParameter(1, true);
 
@@ -137,6 +137,13 @@ class NotificationManager extends BaseNotificationManager
         }
 
         $queryBuilder->getQuery()->getResult();
+    }
+
+    public function markNotificationAsRead(NotificationInterface $notification)
+    {
+        $notification->setRead(true);
+
+        $this->updateNotification($notification);
     }
 
 
