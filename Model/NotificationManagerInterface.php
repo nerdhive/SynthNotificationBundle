@@ -31,11 +31,11 @@ interface NotificationManagerInterface
     function deleteNotification(NotificationInterface $notification);
 
     /**
-     * Updates a notification.
+     * Persits a notification.
      *
      * @param NotificationInterface $notification
      */
-    function updateNotification(NotificationInterface $notification);
+    function persistNotification(NotificationInterface $notification);
 
     /**
      * Returns a notification's fully qualified class name.

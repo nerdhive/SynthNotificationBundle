@@ -32,7 +32,7 @@ abstract class Notification extends BaseNotification
     protected $fromUser;
 
     /**
-     * @var integer $type
+     * @var string $type
      */
     protected $type;
 
@@ -79,22 +79,17 @@ abstract class Notification extends BaseNotification
     /**
      * Set the notification type
      *
-     * @throws \Exception if $type isn't an integer value
-     *
-     * @param integer $type
+     * @param string $type
      */
     public function setType($type)
     {
-        if (!is_int($type)) {
-            throw new \Exception(sprintf('Notification type must be set to an integer, %s given.', gettype($type)));
-        }
         $this->type = $type;
     }
 
     /**
      * Get the notification type
      *
-     * @return integer
+     * @return string
      */
     public function getType()
     {

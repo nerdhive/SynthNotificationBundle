@@ -52,13 +52,18 @@ class NotificationManager extends BaseNotificationManager
         }
     }
 
-    public function updateNotification(NotificationInterface $notification, $andFlush = true)
+    public function persistNotification(NotificationInterface $notification, $andFlush = true)
     {
         $this->em->persist($notification);
         if ($andFlush) {
             $this->em->flush();
         }
     }
+
+	public function flushNotifcations()
+	{
+		$this->em->flush();
+	}
 
     public function findNotificationBy(array $criteria)
     {
