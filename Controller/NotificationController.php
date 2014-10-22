@@ -72,4 +72,13 @@ class NotificationController extends Controller
 
         return new JsonResponse();
     }
+
+	public function listAction(Request $request)
+	{
+		$notifications = $this->getNotificationManager()->findNotificationsForUser($this->getUser());
+
+		return $this->render('SynthNotificationBundle:notification:list.html.twig', array(
+				'notifications' => $notifications
+			));
+	}
 }

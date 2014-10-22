@@ -17,3 +17,7 @@ notification:delete:
 notification:deleteAll:
     path:     /deleteAll
     defaults: { _controller: synth_notification.controller.notification:deleteNotificationsAction }
+
+notification:list:
+    path:     /
+    defaults: { _controller: synth_notification.controller.notification:listAction }
